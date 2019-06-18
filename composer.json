@@ -1,0 +1,43 @@
+{
+    "name": "tohidhabiby/htmltoimage",
+    "description": "generate image from html by wkhtmltoimage",
+    "keywords": [
+        "tohidhabiby",
+        "htmltoimage"
+    ],
+    "homepage": "https://github.com/tohidhabiby/htmltoimage",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "tohihabiby",
+            "email": "tohidhabiby@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.2",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tohidhabiby\\HtmlToImage\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tohidhabiby\\HtmlToImage\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
