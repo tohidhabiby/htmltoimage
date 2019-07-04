@@ -51,7 +51,7 @@ class HtmlToImageTest extends TestCase
         $url = 'http://google.com';
         $htmlToImage = new HtmlToImage();
         $htmlToImage->url($url);
-        $this->assertEquals($url, $htmlToImage->getUrl());
+        $this->assertEquals('\'' . $url . '\'', $htmlToImage->getUrl());
     }
 
     /** @test */
@@ -60,7 +60,7 @@ class HtmlToImageTest extends TestCase
         $path = '~/test';
         $htmlToImage = new HtmlToImage();
         $htmlToImage->path($path);
-        $this->assertEquals($path, $htmlToImage->getPath());
+        $this->assertEquals('\'' . $path . '\'', $htmlToImage->getPath());
     }
 
     /** @test */
@@ -69,7 +69,7 @@ class HtmlToImageTest extends TestCase
         Mockery::close();
         $url = 'http://google.com';
         $path = '~/test/';
-        $command = 'wkhtmltoimage ' . $url . ' ' . $path;
+        $command = 'wkhtmltoimage \'' . $url . '\' \'' . $path . '\'';
         $returnPath = '/home/image.jpg';
         $mock = Mockery::mock(ShellExec::class);
         $mock->shouldReceive('exec')->with($command)->once()->andReturn($returnPath);
@@ -91,7 +91,7 @@ class HtmlToImageTest extends TestCase
         $coordinateX = 300;
         $coordinateY = 400;
         $command = sprintf(
-            'wkhtmltoimage --crop-h %s --crop-w %s --crop-x %s --crop-y %s %s %s',
+            'wkhtmltoimage --crop-h %s --crop-w %s --crop-x %s --crop-y %s \'%s\' \'%s\'',
             $height,
             $width,
             $coordinateX,
@@ -99,9 +99,8 @@ class HtmlToImageTest extends TestCase
             $url,
             $path
         );
-        $returnPath = '/home/image.jpg';
         $mock = Mockery::mock(ShellExec::class);
-        $mock->shouldReceive('exec')->with($command)->once()->andReturn($returnPath);
+        $mock->shouldReceive('exec')->with($command)->once()->andReturn(true);
 
         $htmlToImage = new HtmlToImage($mock);
         $data = $htmlToImage->url($url)
@@ -111,6 +110,6 @@ class HtmlToImageTest extends TestCase
             ->coordinateY($coordinateY)
             ->coordinateX($coordinateX)
             ->generate();
-        $this->assertEquals($returnPath, $data);
+        $this->assertEquals(true, $data);
     }
 }

@@ -10,6 +10,8 @@ class ShellExec
      */
     public function exec(string $string)
     {
-        return shell_exec($string);
+        exec($string, $output, $returnVar);
+
+        return empty($output) && empty($returnVar);
     }
 }

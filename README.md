@@ -1,11 +1,11 @@
-# Very short description of the package
+# Generate image from url
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/tohidhabiby/htmltoimage.svg?style=flat-square)](https://packagist.org/packages/tohidhabiby/htmltoimage)
 [![Build Status](https://img.shields.io/travis/tohidhabiby/htmltoimage/master.svg?style=flat-square)](https://travis-ci.org/tohidhabiby/htmltoimage)
 [![Quality Score](https://img.shields.io/scrutinizer/g/tohidhabiby/htmltoimage.svg?style=flat-square)](https://scrutinizer-ci.com/g/tohidhabiby/htmltoimage)
 [![Total Downloads](https://img.shields.io/packagist/dt/tohidhabiby/htmltoimage.svg?style=flat-square)](https://packagist.org/packages/tohidhabiby/htmltoimage)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package uses wkhtmltoimage software, so you should install this software on your server.
 
 ## Installation
 
@@ -16,15 +16,19 @@ composer require tohidhabiby/htmltoimage
 ```
 
 ## Usage
+Use this code and set variables then you will have an image in your path.
 
 ``` php
-// Usage description here
-```
+use Tohidhabiby\HtmlToImage\HtmlToImage;
 
-### Testing
-
-``` bash
-composer test
+$htmlToImage = new HtmlToImage();
+$htmlToImage->url($url)
+    ->path($path)
+    ->cropHeight($height) // optonal Set height for cropping
+    ->cropWidth($width) // optonal Set width for cropping
+    ->coordinateX($x) // optonal Set x coordinate for cropping
+    ->coordinateY($y) // optonal Set y coordinate for cropping
+    ->generate();
 ```
 
 ### Changelog
@@ -34,10 +38,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email tohidhabiby@gmail.com instead of using the issue tracker.
 
 ## Credits
 

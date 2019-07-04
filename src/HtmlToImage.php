@@ -21,7 +21,9 @@ class HtmlToImage implements HtmlToImageInterface
     public function __construct(?ShellExec $shellExec = null, ?string $command = null)
     {
         $this->shellExec = $shellExec ?? new ShellExec;
-        $this->command = $command;
+        if (!empty($command)) {
+            $this->command = $command;
+        }
     }
 
     /**
@@ -31,7 +33,7 @@ class HtmlToImage implements HtmlToImageInterface
      */
     public function url(string $url): HtmlToImageInterface
     {
-        $this->url = $url;
+        $this->url = '\'' . $url . '\'';
 
         return $this;
     }
@@ -52,7 +54,7 @@ class HtmlToImage implements HtmlToImageInterface
      */
     public function path(string $path): HtmlToImageInterface
     {
-        $this->path = $path;
+        $this->path = '\'' . $path . '\'';
 
         return $this;
     }
